@@ -5,20 +5,20 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args)  {
         System.out.println("Привет, математик!");
-        Scanner scan = new Scanner(System.in); // Âûäåëèëè ïàìÿòü äëÿ ââîäà äàííûõ
-        System.out.println("Ââåäè îïåðàöèþ ñ öèôðàìè îò 1 äî 10 èëè îò I äî X â ôîðìàòå a + b, a - b, a * b, a / b: ");
-        String vvod = scan.nextLine(); // Ïîëó÷àåì îò ïîëüçîâàòåëÿ ñòðîêó
+        Scanner scan = new Scanner(System.in); // Выделили память для ввода данных
+        System.out.println("Введи операцию с цифрами от 1 до 10 или от I до X в формате a + b, a - b, a * b, a / b: ");
+        String vvod = scan.nextLine(); // Получаем от пользователя строку
         System.out.println(calc(vvod));
     }
 
     public static String calc(String input) {
-        String value = input.replaceAll("[-+/*^]"," $0 ").replace("  ", " ").trim(); //äîáàâèë ïðîáåëû, åñëè ýòîãî íå ñäåëàë ïîëüçîâàòåëü
-        String[] massive = value.split(" "); //Äåëþ ñòðîêó íà ìàññèâ ïî ïðîáåëó
+        String value = input.replaceAll("[-+/*^]"," $0 ").replace("  ", " ").trim(); //добавил пробелы, если этого не сделал пользователь
+        String[] massive = value.split(" "); //Делю строку на массив по пробелу
        try{ String a = massive[0];
         String symbol = massive[1];
         String b = massive[2];
         if (massive.length>3) {
-            System.out.println("ôîðìàò ìàòåìàòè÷åñêîé îïåðàöèè íå óäîâëåòâîðÿåò çàäàíèþ - äâà îïåðàíäà è îäèí îïåðàòîð (+, -, /, *)");
+            System.out.println("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
             return "";
             } else {
                try {
@@ -34,25 +34,25 @@ public class Main {
                        String d = Integer.toString(y);
                        if (calculating(c, d, symbol) < -10000) {
                            return "";
-                       } else if (calculating(c, d, symbol) < 0){return "â ðèìñêîé ñèñòåìå íåò îòðèöàòåëüíûõ ÷èñåë";}
+                       } else if (calculating(c, d, symbol) < 0){return "в римской системе нет отрицательных чисел";}
                        else {
                            String resultRoman = convertNumToRoman(calculating(c, d, symbol));
                            return resultRoman;
                        }
                    }
                    else if ((romanToNumber(a.toUpperCase()) < 0 && romanToNumber(b.toUpperCase()) > 0) || (romanToNumber(a.toUpperCase()) > 0 && romanToNumber(b.toUpperCase()) < 0)){
-                       System.out.println("èñïîëüçóþòñÿ îäíîâðåìåííî ðàçíûå ñèñòåìû ñ÷èñëåíèÿ");
+                       System.out.println("используются одновременно разные системы счисления");
                        return "";
                    }
                    else {
-                           System.out.println("Íåâåðíî ââåäåíî ÷èñëî");
+                           System.out.println("Неверно введено число");
                            return "";
                    }
                }
            }
        }
        catch (ArrayIndexOutOfBoundsException e){
-           System.out.println("ñòðîêà íå ÿâëÿåòñÿ ìàòåìàòè÷åñêîé îïåðàöèåé");
+           System.out.println("строка не является математической операцией");
            return "";
        }
     }
@@ -94,7 +94,7 @@ public class Main {
                 return 10;
             }
         } catch (InputMismatchException e) {
-            throw new InputMismatchException("Íåâåðíûé ôîðìàò äàííûõ");
+            throw new InputMismatchException("Неверный формат данных");
         }
         return -1;
     }
@@ -103,7 +103,7 @@ public class Main {
         int x = Integer.parseInt(a.trim());
         int y = Integer.parseInt(b.trim());
         if (x < 1 || x > 10 || y < 0 || y > 10) {
-            System.out.println("×èñëî âíå äèàïàçîíà");
+            System.out.println("Число вне диапазона");
             return -11000;
         }
         if (symbol.equals("*")) {
@@ -114,7 +114,7 @@ public class Main {
                 int s = x / y;
                 return s;
             } catch (ArithmeticException | InputMismatchException e) {
-                System.out.println("Äåëèòü íà 0 íåëüçÿ");
+                System.out.println("Делить на 0 нельзя");
                 return -11000;
             }
         } else if (symbol.equals("+")) {
@@ -124,7 +124,7 @@ public class Main {
             int s = x - y;
             return s;
         } else {
-            System.out.println("Íåâåðíàÿ îïåðàöèÿ");
+            System.out.println("Неверная операция");
             return -11000;}
     }
 }
