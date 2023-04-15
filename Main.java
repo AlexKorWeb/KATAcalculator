@@ -4,21 +4,21 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args)  {
-        System.out.println("Привет, математик!");
-        Scanner scan = new Scanner(System.in); // Выделили память для ввода данных
-        System.out.println("Введи операцию с цифрами от 1 до 10 или от I до X в формате a + b, a - b, a * b, a / b: ");
-        String vvod = scan.nextLine(); // Получаем от пользователя строку
+        System.out.println("РџСЂРёРІРµС‚, РјР°С‚РµРјР°С‚РёРє!");
+        Scanner scan = new Scanner(System.in); // Г‚Г»Г¤ГҐГ«ГЁГ«ГЁ ГЇГ Г¬ГїГІГј Г¤Г«Гї ГўГўГ®Г¤Г  Г¤Г Г­Г­Г»Гµ
+        System.out.println("Г‚ГўГҐГ¤ГЁ Г®ГЇГҐГ°Г Г¶ГЁГѕ Г± Г¶ГЁГґГ°Г Г¬ГЁ Г®ГІ 1 Г¤Г® 10 ГЁГ«ГЁ Г®ГІ I Г¤Г® X Гў ГґГ®Г°Г¬Г ГІГҐ a + b, a - b, a * b, a / b: ");
+        String vvod = scan.nextLine(); // ГЏГ®Г«ГіГ·Г ГҐГ¬ Г®ГІ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї Г±ГІГ°Г®ГЄГі
         System.out.println(calc(vvod));
     }
 
     public static String calc(String input) {
-        String value = input.replaceAll("[-+/*^]"," $0 ").replace("  ", " ").trim(); //добавил пробелы, если этого не сделал пользователь
-        String[] massive = value.split(" "); //Делю строку на массив по пробелу
+        String value = input.replaceAll("[-+/*^]"," $0 ").replace("  ", " ").trim(); //Г¤Г®ГЎГ ГўГЁГ« ГЇГ°Г®ГЎГҐГ«Г», ГҐГ±Г«ГЁ ГЅГІГ®ГЈГ® Г­ГҐ Г±Г¤ГҐГ«Г Г« ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј
+        String[] massive = value.split(" "); //Г„ГҐГ«Гѕ Г±ГІГ°Г®ГЄГі Г­Г  Г¬Г Г±Г±ГЁГў ГЇГ® ГЇГ°Г®ГЎГҐГ«Гі
        try{ String a = massive[0];
         String symbol = massive[1];
         String b = massive[2];
         if (massive.length>3) {
-            System.out.println("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+            System.out.println("ГґГ®Г°Г¬Г ГІ Г¬Г ГІГҐГ¬Г ГІГЁГ·ГҐГ±ГЄГ®Г© Г®ГЇГҐГ°Г Г¶ГЁГЁ Г­ГҐ ГіГ¤Г®ГўГ«ГҐГІГўГ®Г°ГїГҐГІ Г§Г Г¤Г Г­ГЁГѕ - Г¤ГўГ  Г®ГЇГҐГ°Г Г­Г¤Г  ГЁ Г®Г¤ГЁГ­ Г®ГЇГҐГ°Г ГІГ®Г° (+, -, /, *)");
             return "";
             } else {
                try {
@@ -34,25 +34,25 @@ public class Main {
                        String d = Integer.toString(y);
                        if (calculating(c, d, symbol) < -10000) {
                            return "";
-                       } else if (calculating(c, d, symbol) < 0){return "в римской системе нет отрицательных чисел";}
+                       } else if (calculating(c, d, symbol) < 0){return "Гў Г°ГЁГ¬Г±ГЄГ®Г© Г±ГЁГ±ГІГҐГ¬ГҐ Г­ГҐГІ Г®ГІГ°ГЁГ¶Г ГІГҐГ«ГјГ­Г»Гµ Г·ГЁГ±ГҐГ«";}
                        else {
                            String resultRoman = convertNumToRoman(calculating(c, d, symbol));
                            return resultRoman;
                        }
                    }
                    else if ((romanToNumber(a.toUpperCase()) < 0 && romanToNumber(b.toUpperCase()) > 0) || (romanToNumber(a.toUpperCase()) > 0 && romanToNumber(b.toUpperCase()) < 0)){
-                       System.out.println("используются одновременно разные системы счисления");
+                       System.out.println("ГЁГ±ГЇГ®Г«ГјГ§ГіГѕГІГ±Гї Г®Г¤Г­Г®ГўГ°ГҐГ¬ГҐГ­Г­Г® Г°Г Г§Г­Г»ГҐ Г±ГЁГ±ГІГҐГ¬Г» Г±Г·ГЁГ±Г«ГҐГ­ГЁГї");
                        return "";
                    }
                    else {
-                           System.out.println("Неверно введено число");
+                           System.out.println("ГЌГҐГўГҐГ°Г­Г® ГўГўГҐГ¤ГҐГ­Г® Г·ГЁГ±Г«Г®");
                            return "";
                    }
                }
            }
        }
        catch (ArrayIndexOutOfBoundsException e){
-           System.out.println("строка не является математической операцией");
+           System.out.println("Г±ГІГ°Г®ГЄГ  Г­ГҐ ГїГўГ«ГїГҐГІГ±Гї Г¬Г ГІГҐГ¬Г ГІГЁГ·ГҐГ±ГЄГ®Г© Г®ГЇГҐГ°Г Г¶ГЁГҐГ©");
            return "";
        }
     }
@@ -94,7 +94,7 @@ public class Main {
                 return 10;
             }
         } catch (InputMismatchException e) {
-            throw new InputMismatchException("Неверный формат данных");
+            throw new InputMismatchException("ГЌГҐГўГҐГ°Г­Г»Г© ГґГ®Г°Г¬Г ГІ Г¤Г Г­Г­Г»Гµ");
         }
         return -1;
     }
@@ -103,7 +103,7 @@ public class Main {
         int x = Integer.parseInt(a.trim());
         int y = Integer.parseInt(b.trim());
         if (x < 1 || x > 10 || y < 0 || y > 10) {
-            System.out.println("Число вне диапазона");
+            System.out.println("Г—ГЁГ±Г«Г® ГўГ­ГҐ Г¤ГЁГ ГЇГ Г§Г®Г­Г ");
             return -11000;
         }
         if (symbol.equals("*")) {
@@ -114,7 +114,7 @@ public class Main {
                 int s = x / y;
                 return s;
             } catch (ArithmeticException | InputMismatchException e) {
-                System.out.println("Делить на 0 нельзя");
+                System.out.println("Г„ГҐГ«ГЁГІГј Г­Г  0 Г­ГҐГ«ГјГ§Гї");
                 return -11000;
             }
         } else if (symbol.equals("+")) {
@@ -124,7 +124,7 @@ public class Main {
             int s = x - y;
             return s;
         } else {
-            System.out.println("Неверная операция");
+            System.out.println("ГЌГҐГўГҐГ°Г­Г Гї Г®ГЇГҐГ°Г Г¶ГЁГї");
             return -11000;}
     }
 }
